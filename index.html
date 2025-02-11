@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center min-h-screen">
+    
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md w-full fixed top-0 left-0">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <h1 class="text-xl font-bold text-blue-600">SMG</h1>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-lg mt-20">
+        <h2 class="text-3xl font-bold mb-6 text-center text-gray-700">Registration Form</h2>
+        <form id="registrationForm" class="space-y-4" enctype="multipart/form-data">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">User Name</label>
+                <input type="text" name="userName" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400" required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Father's Name</label>
+                <input type="text" name="fatherName" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400" required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Institution Name</label>
+                <input type="text" name="institutionName" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400" required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Contact Number</label>
+                <input type="tel" name="contactNumber" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400" required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Alternate Contact Number</label>
+                <input type="tel" name="altContactNumber" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Permanent Address</label>
+                <textarea name="permanentAddress" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400" required></textarea>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Email ID</label>
+                <input type="email" name="emailId" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400" required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Idea Name</label>
+                <input type="text" name="ideaName" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400" required>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(this);
+
+            const response = await fetch("http://localhost:5000/register", {
+                method: "POST",
+                body: formData,
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        });
+    </script>
+</body>
+</html>
